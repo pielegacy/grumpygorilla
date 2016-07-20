@@ -19,3 +19,5 @@ the content folder of your release or debug folder within bin
 This is just a thing with MonoGame, you can view some of my development contributions [here](https://www.youtube.com/playlist?list=PLNcepEZ9TLOy66qFEoO7XvFgki_rmYrnq)
 
 ### Shoutout to Andrew Coe and Talfryn Dawlings for yelling random shit at me for ideas
+
+If anyone has art assets they'd like me to use and not pay money for or ideas I can steal please let me know
