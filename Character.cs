@@ -13,6 +13,7 @@ namespace GrumpyGorillaNotShit
     // Container for da monkey man
     class Character
     {
+        public Mechanic_World world = new Mechanic_World(new Vector2(10,10), new Vector2(1,1));
         public Sprite sprite;
         private Texture2D gorilla_texture;
         private KeyboardState currentKeys, prevKeys;
@@ -20,7 +21,7 @@ namespace GrumpyGorillaNotShit
         private float gorilla_speed = 4f; // Default speed
         private bool gorilla_ismoving = false;
         private double gorilla_hunger = 100;
-
+        public exit_type exit_status = exit_type.Not;
         public Character(ContentManager content, float pos_x, float pos_y)
         {
             gorilla_texture = content.Load<Texture2D>("sprite_greg_og.png");
@@ -30,7 +31,7 @@ namespace GrumpyGorillaNotShit
         public void UpdateCharacter() {
             prevKeys = currentKeys;
             currentKeys = Keyboard.GetState();
-            if (currentKeys.IsKeyDown(Keys.Up))
+            if (currentKeys.IsKeyDown(Keys.Up)) // Movement logic TODO : Add momentum
                 sprite.Location.Y -= gorilla_speed;
             if (currentKeys.IsKeyDown(Keys.Down))
                 sprite.Location.Y += gorilla_speed;
@@ -43,6 +44,7 @@ namespace GrumpyGorillaNotShit
             {
                 gorilla_ismoving = true;
                 sprite.CurrentLevel = 1;
+                exit_status = retrieveExiting(); // Only checks for exiting when moving
             }
             else
             {
@@ -52,12 +54,28 @@ namespace GrumpyGorillaNotShit
             foreach (var bar in hud)
                 bar.UpdateHud();
             gorilla_hunger -= 0.1;
+            world.Update_World(this);
             sprite.Update(); 
+        }
+        private exit_type retrieveExiting()
+        {
+            var x = sprite.Location.X;
+            var y = sprite.Location.Y;
+            if (x < 0)
+                return exit_type.West;
+            else if (x > 800)
+                return exit_type.East;
+            else if (y > 600)
+                return exit_type.South;
+            else if (y < 0)
+                return exit_type.North;
+            else
+                return exit_type.Not;
         }
         public void DrawCharacter(SpriteBatch spriteBatch)
         {
             sprite.Draw(spriteBatch);
-            foreach (var bar in hud)
+            foreach (var bar in hud) // Takes UI into account
                 bar.DrawHud(spriteBatch);
         }
 

@@ -10,4 +10,5 @@ namespace GrumpyGorillaNotShit
         
     }
     public enum hud_type { Hunger, Stamina, Halal_Certification };
+    public enum exit_type { Not, North, East, South, West}
 }
