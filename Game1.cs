@@ -12,15 +12,15 @@ namespace GrumpyGorillaNotShit
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D gorilla_texture;
         Song music;
-        Character gorilla;
+        public const int GAME_WIDTH = 800;
+        public const int GAME_HEIGHT = 600;
         EntityManager entities = new EntityManager();
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 800;
-            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferWidth = GAME_WIDTH;
+            graphics.PreferredBackBufferHeight = GAME_HEIGHT;
             Content.RootDirectory = "Content";
         }
 
@@ -46,10 +46,8 @@ namespace GrumpyGorillaNotShit
             music = Content.Load<Song>("Wet-N-Wild");
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(music);
-            //MediaPlayer.IsMuted = true;
+            MediaPlayer.IsMuted = true;
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            gorilla_texture = Content.Load<Texture2D>("sprite_greg_og.png");
-            gorilla = new Character(this.Content, 10, 10);
             entities.LoadEntities(graphics, Content);
             // TODO: use this.Content to load your game content here
         }
@@ -74,7 +72,6 @@ namespace GrumpyGorillaNotShit
                 Exit();
             if (Keyboard.GetState().IsKeyDown(Keys.M))
                 MediaPlayer.IsMuted = true;
-            gorilla.UpdateCharacter();
             entities.UpdateEntities();
             // TODO: Add your update logic here
 
@@ -88,7 +85,6 @@ namespace GrumpyGorillaNotShit
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            gorilla.DrawCharacter(spriteBatch);
             entities.DrawEntities(spriteBatch);
             // TODO: Add your drawing code here
 

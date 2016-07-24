@@ -79,6 +79,7 @@
     <Compile Include="Character.cs" />
     <Compile Include="EntityManager.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Item_HSP.cs" />
     <Compile Include="Mechanic_World.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

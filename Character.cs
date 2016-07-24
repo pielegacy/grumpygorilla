@@ -17,7 +17,6 @@ namespace GrumpyGorillaNotShit
         public Sprite sprite;
         private Texture2D gorilla_texture;
         private KeyboardState currentKeys, prevKeys;
-        private List<Hud_Bar> hud = new List<Hud_Bar>();
         private float gorilla_speed = 4f; // Default speed
         private bool gorilla_ismoving = false;
         private double gorilla_hunger = 100;
@@ -26,7 +25,7 @@ namespace GrumpyGorillaNotShit
         {
             gorilla_texture = content.Load<Texture2D>("sprite_greg_og.png");
             sprite = new Sprite(gorilla_texture, 4, 2, pos_x, pos_y);
-            hud.Add(new Hud_Bar(content, 1, hud_type.Hunger));
+            //hud.Add(new Hud_Bar(content, 1, hud_type.Hunger));
         }
         public void UpdateCharacter() {
             prevKeys = currentKeys;
@@ -51,8 +50,8 @@ namespace GrumpyGorillaNotShit
                 gorilla_ismoving = false;
                 sprite.CurrentLevel = 0;
             }
-            foreach (var bar in hud)
-                bar.UpdateHud();
+            //foreach (var bar in hud)
+            //    bar.UpdateHud();
             gorilla_hunger -= 0.1;
             world.Update_World(this);
             sprite.Update(); 
@@ -63,11 +62,11 @@ namespace GrumpyGorillaNotShit
             var y = sprite.Location.Y;
             if (x < 0)
                 return exit_type.West;
-            else if (x > 800)
+            else if (x > 820)
                 return exit_type.East;
-            else if (y > 600)
+            else if (y > 580)
                 return exit_type.South;
-            else if (y < 0)
+            else if (y < -20)
                 return exit_type.North;
             else
                 return exit_type.Not;
@@ -75,8 +74,8 @@ namespace GrumpyGorillaNotShit
         public void DrawCharacter(SpriteBatch spriteBatch)
         {
             sprite.Draw(spriteBatch);
-            foreach (var bar in hud) // Takes UI into account
-                bar.DrawHud(spriteBatch);
+            //foreach (var bar in hud) // Takes UI into account
+            //    bar.DrawHud(spriteBatch);
         }
 
     }
